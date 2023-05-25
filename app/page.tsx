@@ -1,7 +1,6 @@
 "use client"; 
 import { useState } from "react";
 import styles from "./../styles/Home.module.scss";
-import { nanoid } from 'nanoid'
 
 let directory: ItemType[] = [
   {
@@ -39,18 +38,17 @@ interface ItemType {
 interface Props {
   unit: ItemType;
   depth: number;
-  key : string;
 }
 
-const Item: React.FC<Props> = ({ unit, depth, key }) => {
+const Item: React.FC<Props> = ({ unit, depth }) => {
   const [toggle, setToggle]= useState<boolean>(false);
 
   return (
-    <div key={key}>
-      {unit.children ? (<div  key={nanoid()} style={{cursor: "pointer"}} onClick={() => setToggle(!toggle)}>{toggle ? "- " : "+" } {unit.name}</div>) : (<div  key={nanoid()}>{unit.name}</div>)}
-      {toggle && <div style={{ paddingLeft: `${depth * 10}px` }}  key={nanoid()}>
+    <div>
+      {unit.children ? (<div style={{cursor: "pointer"}} onClick={() => setToggle(!toggle)}>{toggle ? "- " : "+" } {unit.name}</div>) : (<div >{unit.name}</div>)}
+      {toggle && <div style={{ paddingLeft: `${depth * 10}px` }} >
         {unit.children?.map((child) => (
-          <Item unit={child}  depth={depth + 1} key={nanoid()}/>
+          <Item unit={child}  depth={depth + 1} />
         ))}
       </div>}
     </div>
@@ -61,7 +59,7 @@ export default function Home() {
   return (
     <div className={styles.home} >
       {directory.map((unit) => (
-        <Item unit={unit} depth={1} key={nanoid()} />
+        <Item unit={unit} depth={1} />
       ))}
     </div>
   );

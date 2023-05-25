@@ -2,4 +2,9 @@ body {
   background-color: rgb(48, 35, 35);
   color: rgba(255, 255, 255, 0.728);
   padding: 0;
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  align-items: center;
+  min-width: 160px;
 }
